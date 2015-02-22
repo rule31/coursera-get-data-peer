@@ -19,10 +19,13 @@ feature_key = read.table("features.txt")
 mean_key = grep("mean\\(\\)", feature_key$V2)
 std_key = grep("std\\(\\)", feature_key$V2)
 
+## The actual extraction code is below in step 4.
 
 #3. Uses descriptive activity names to name the activities in the data set
 activity_label = read.table("activity_labels.txt")
 y_data_label = activity_label$V2[y_data$V1]
+
+## The actual labelling code is below in step 4.
 
 #4. Appropriately labels the data set with descriptive variable names. 
 ext_key = sort(union(mean_key, std_key))
