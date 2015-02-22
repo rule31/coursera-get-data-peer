@@ -1,3 +1,4 @@
+library(data.table)
 setwd("Z:/coursera/data_science_track/get_data/UCI_HAR_Dataset")
 
 x_test = read.table("test/X_test.txt")
@@ -36,18 +37,6 @@ colnames(clean_data)[1:2] = cbind('subject', 'activity')
 #5. From the data set in step 4, creates a second, independent tidy data set with 
 #   the average of each variable for each activity and each subject.
 
-# 
-# row_num_total = length(unique(sub_data$V1)) * length(unique(activity_label$V1))
-# col_num_total = dim(clean_data)[2]
-# 
-# res = matrix(NA, nrow = row_num_total, ncol=col_num_total)
-# res = as.data.frame(res)
-# colnames(res) = colnames(clean_data)
-
-
-
-library(data.table)
-clean_data_dt <- data.table(clean_data)
-res<- clean_data_dt[, lapply(.SD, mean), by=c("subject", "activity")]
-
+clean_data_dt = data.table(clean_data)
+res =  clean_data_dt[, lapply(.SD, mean), by=c("subject", "activity")]
 write.table(res, "tidy_data_processed.txt", row.name=FALSE)
